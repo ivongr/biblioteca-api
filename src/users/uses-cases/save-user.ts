@@ -1,15 +1,16 @@
 import { dbBiblioteca } from '../../config/connect-db.ts';
 import { COLLECTIONS } from '../../shared/constants/db-collections.ts';
-import type { IUser } from '../entities/user.ts';
+import { IUser } from '../entities/user.ts';
+import { parseUser } from '../validations/user-schema.ts';
 
 export async function saveUser(props: { user: IUser }): Promise<IUser> {
-  const { _id, ...userWithoutId } = props.user;
+  const parsedUser = parseUser(props.user);
 
-  const result = await dbBiblioteca.collection(COLLECTIONS.users).insertOne(userWithoutId);
+  const result = await dbBiblioteca.collection(COLLECTIONS.users).insertOne(parsedUser);
 
   return {
     _id: result.insertedId.toString(),
-    email: userWithoutId.email,
-    name: userWithoutId.name,
+    email: parsedUser.email,
+    name: parsedUser.name,
   };
 }
