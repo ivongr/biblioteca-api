@@ -53,9 +53,9 @@ bookRoutes.post(ROUTE, async (req, res) => {
   }
 });
 
-bookRoutes.put(ROUTE + '/:id', async (req, res) => {
+bookRoutes.put(ROUTE, async (req, res) => {
   try {
-    const book = await updateBook({ book: { ...req.body, _id: req.params.id } });
+    const book = await updateBook({ book: req.body });
     res.status(HttpStatusCodes.OK).json({
       message: 'Libro actualizado correctamente',
       data: book,
