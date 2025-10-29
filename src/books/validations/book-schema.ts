@@ -13,6 +13,7 @@ export const bookSchema = object({
     nonEmpty('El nombre del autor es requerido.'),
     maxLength(30, 'El nombre del autor  no puede sobrepasar de los 30 caracteres.')
   ),
+  idUser: pipe(string('El id del cliente no tiene un formato correcto.')),
 });
 
 export function parseBook(user: IBook) {
