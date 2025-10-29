@@ -4,4 +4,5 @@ export interface IBook {
   _id: string | ObjectId;
   title: string;
   autor: string;
+  idUser: string | ObjectId;
 }
